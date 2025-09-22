@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -144,10 +145,7 @@ public class Main {
         System.out.println("Введите позицию для вставки: ");
         int pos = scanner.nextInt();
         int[] resul = t.add(arr, x, pos);
-        System.out.print("Результат: ");
-        for (int num : resul) {
-            System.out.print(num + " ");
-        }
+        System.out.println("Результат: " + Arrays.toString(resul));
 
 
         System.out.println("\nЗадача 4.6");
@@ -157,10 +155,6 @@ public class Main {
         System.out.println("Введите элементы массива: ");
         for (int i = 0; i < size; i++) {
             arr[i] = scanner.nextInt();
-        }
-        System.out.println("Исходный массив: ");
-        for (int num : arr) {
-            System.out.print(num + " " );
         }
         t.reverse(arr);
         System.out.println("\nРезультат: ");
@@ -185,13 +179,7 @@ public class Main {
             arr2[i] = scanner.nextInt();
         }
         int[] result4 = t.concat(arr1,arr2);
-        System.out.println("Результат: ");
-        for (int i = 0;i < result4.length;i++){
-            System.out.println(result4[i]);
-            if (i < result4.length - 1){
-                System.out.println(" ");
-            }
-        }
+        System.out.println("Результат: " + Arrays.toString(result4));
 
 
         System.out.println("Задача 4.10");
@@ -203,17 +191,9 @@ public class Main {
             arr[i] = scanner.nextInt();
         }
         int[] result5 = t.deleteNegative(arr);
-        System.out.println("Результат: ");
-        for (int i = 0;i < result5.length;i++){
-            System.out.println(result5[i]);
-            if (i < result5.length - 1){
-                System.out.println(" ");
-            }
+        System.out.println("Результат: " + Arrays.toString(result5));
         }
 
 
-
-
-    }
 }
 
