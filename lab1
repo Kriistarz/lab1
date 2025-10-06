@@ -4,11 +4,9 @@ import java.util.Scanner;
 public class lab1 {
     //1.2
     public int sumLastNums(int x) {
-        int y, z, w;
-        y = x % 10;// Получаем последнюю цифру числа x
-        z = x / 10;// Убираем посаледнюю цифру из x
-        w = z % 10;// Получаем предпоследнюю цифру
-        return y + w;// Возвращаем сумму 2 последних чисел
+        int lastDigit = x % 10;// Получаем последнюю цифру числа x
+        int secondlastDigit  = (x / 10)%10;// Убираем посаледнюю цифру и получаем предпоследнюю
+        return lastDigit + secondlastDigit;// Возвращаем сумму 2 последних чисел
     }
 
     //1.4
@@ -26,7 +24,10 @@ public class lab1 {
 
     //1.8
     public boolean isDivisor(int a, int b) {
-        return  (a % b == 0 || b % a == 0);// Проверяем ,делится ли одно число на другое
+        if  (a % b == 0 || b % a == 0)// Проверяем ,делится ли одно число на другое
+             return true;
+        else
+             return false;
     }
 
     //1.10
@@ -37,9 +38,9 @@ public class lab1 {
     //2.2
     public double safeDiv(int x, int y) {
         if (y == 0) {
-            return 0;
+            return 0;// Возвращаем 0 при делении на 0
         }
-        return (double) x / y;
+        return (double) x / y;// Выполняем деление с приведением к double
     }
 
     //2.4
@@ -62,20 +63,20 @@ public class lab1 {
         if (y + z == x)
             return true;
         else
-            return false;
+            return false;// Ни одна комбинация не подходит
     }
 
     //2.8
     public String age(int x) {
         String suffix;
         if (x % 10 == 1 && x % 100 != 11) {
-            suffix = "год";
+            suffix = "год";// Для чисел оканчивающихся на 1(кроме11)
         } else if (x % 10 >= 2 && x % 10 <= 4 && (x % 100 < 12 || x % 100 > 14)) {
-            suffix = "года";
+            suffix = "года";// Для чисел оканчивающихся на 2-4(кроме12-14)
         } else {
-            suffix = "лет";
+            suffix = "лет";// Для всех остальных случаев
         }
-        return x + " " + suffix;
+        return x + " " + suffix;// Возвращаем отформатированную строку
     }
 
     //2.10
@@ -103,23 +104,27 @@ public class lab1 {
 
     //3.2
     public String reverseListNums(int x){
-        StringBuilder result = new StringBuilder();
-        for (int i = x; i >= 0; i--){
-            result.append(i);
+        String result = "";
+        for (int i = x; i >= 0; i--){// Цикл от x до 0
+            result += i;// Добавляем число
             if (i > 0){
-                result.append(" ");
+                result+=" ";// Добавляем пробел между числами
             }
         }
-        return result.toString();
+        return result;// Возвращаем строку с последовательностью
     }
 
     //3.4
     public int pow(int x,int y){
-        int result = 1;
-        for ( int i = 0;i < y; i++){
-            result *= x;
+        if (y < 0){
+            System.out.println("Ошибка:отрицательная степень");
+            return 1;
         }
-        return result;
+        int result = 1;// Начальное значение
+        for ( int i = 0;i < y; i++){// Цикл y раз
+            result *= x;// Умножаем рез на x
+        }
+        return result;// Возвращаем x в степени y
     }
 
     //3.6
@@ -129,21 +134,21 @@ public class lab1 {
         }
         int lastDigit = x % 10;
         while (x > 0) {
-            if (x % 10 != lastDigit) {
-                return false;
+            if (x % 10 != lastDigit) {// Сравниваем тек цифру с последней
+                return false;// Цифрцы разные
             }
-            x /= 10;
+            x /= 10;// Убираем последнюю цифру
         }
         return true;
     }
 
     //3.8
     public void leftTriangle(int x){
-        for (int i = 1;i <= x;i++) {
-            for (int j = 1;j <= i;j++) {
-                System.out.print("*");
+        for (int i = 1;i <= x;i++) {// Цикл по строкам
+            for (int j = 1;j <= i;j++) {// Цикл по звездочкам в строке
+                System.out.print("*");// Печатаем звездочку
             }
-            System.out.println();
+            System.out.println();// Переход на новую строку
         }
     }
 
@@ -151,86 +156,90 @@ public class lab1 {
     public void guessGame(){
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
-        int randomNumber = random.nextInt(10);
-        int attempts = 0;
-        int userGuess;
+        int randomNumber = random.nextInt(10);// Генерируем число от 0 до 9
+        int attempts = 0;// Счетчик попыток
+        int userGuess;// Переменная для догадки пользователя
         do {
             System.out.println("Введите число от 0 до 9: ");
             userGuess = scanner.nextInt();
-            attempts++;
+            attempts++;// Увелич счетчик попыток
             if (userGuess == randomNumber) {
                 System.out.println("Вы угадали! ");
             } else {
                 System.out.println("Вы не угадали, введите число от 0 до 9: ");
             }
-        } while (userGuess != randomNumber);
+        } while (userGuess != randomNumber);// Повторяем пока не угадают
         System.out.println("Вы отгадали число за " + attempts + " попытки(ок)");
     }
 
     //4.2
     public int findLast(int[] arr,int x) {
-        for (int i = arr.length - 1;i >= 0;i--) {
-            if (arr[i] == x) {
-                return i;
+        for (int i = arr.length - 1;i >= 0;i--) {// Идем с конца массива
+            if (arr[i] == x) {// Если нашли элемент
+                return i;// Возвращаем индекс
             }
         }
-        return -1;
+        return -1;// Элемент не найден
     }
 
     //4.4
     public int[] add(int[] arr,int x,int pos){
-        int[] newArr = new int[arr.length + 1];
+        if (pos < 0 || pos > arr.length){
+            System.out.println("Ошибка:неверная позиция вставки");
+            return arr;
+        }
+        int[] newArr = new int[arr.length + 1];// Создаем новый массив на 1 элемент больше
         for (int i = 0; i < pos;i++) {
-            newArr[i] = arr[i];
+            newArr[i] = arr[i];// Копируем элементы до позиции вставки
         }
-        newArr[pos] = x;
+        newArr[pos] = x;// Вставляем новый элемент
         for (int i = pos; i < arr.length;i++){
-            newArr[i+1] = arr[i];
+            newArr[i+1] = arr[i];// Копируем оставшиеся элементы после вставки
         }
-        return newArr;
+        return newArr;// Возвращаем новый массив с добав эл
     }
 
     //4.6
     public void reverse(int[] arr) {
         int left = 0;
         int right = arr.length - 1;
-        while (left < right) {
-            int temp = arr[left];
-            arr[left] = arr[right];
-            arr[right] = temp;
-            left++;
-            right--;
+        while (left < right) {// Пока указатели не встретились
+            int temp = arr[left];// Сохраняем знач левого элемента
+            arr[left] = arr[right];// Заменяем левый элемент правым
+            arr[right] = temp;// Заменяем правый элемент сохраняем знач
+            left++;// Двигаем левый указ вправо
+            right--;// Двигаем правый указ влево
         }
     }
 
     //4.8
     public int[] concat(int[] arr1,int[] arr2) {
-        int[] result = new int[arr1.length + arr2.length];
-        for (int i = 0; i < arr1.length; i++) {
-            result[i] = arr1[i];
+        int[] result = new int[arr1.length + arr2.length];// Создаем массив суммарного размера
+        for (int i = 0; i < arr1.length; i++) {// Копируем элементы из первого массива
+            result[i] = arr1[i];// Заполняем начало res массива
         }
-        for (int i = 0; i < arr1.length; i++) {
-            result[arr1.length + i] = arr2[i];
+        for (int i = 0; i < arr1.length; i++) {// Копируем элементы из второго массива
+            result[arr1.length + i] = arr2[i];// Добавляем после элементов первого массива
         }
-        return result;
+        return result;// Возвращаем объединенный массив
     }
 
     //4.10
     public int[] deleteNegative(int[] arr){
-        int count = 0;
-        for (int num : arr){
+        int count = 0;// Счетчик для полож чисел
+        for (int num : arr){// Считаем количество полож чисел в массиве
             if (num >= 0){
                 count++;
             }
         }
         int[] result = new int[count];
-        int index = 0;
-        for (int num : arr){
-            if (num >= 0){
-                result[index++] = num;
+        int index = 0;// Индекс для заполнения нового массива
+        for (int num : arr){// Копируем только полож числа в новый массив
+            if (num >= 0){// Если эл полож
+                result[index++] = num;// Добавляем в результат и увелич индекс
             }
         }
-        return result;
+        return result;// Возвращаем массив без отрицц элементов
     }
 
 
